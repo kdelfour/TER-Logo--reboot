@@ -1,3 +1,4 @@
+; Arbre récursif
 ; Un arbre récursif.
 
 pour arbre :taille :niveau

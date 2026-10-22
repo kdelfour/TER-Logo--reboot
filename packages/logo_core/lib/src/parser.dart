@@ -74,8 +74,7 @@ void _tokenizeWord(LogoWord w, List<Token> out) {
           // Nombre négatif collé : -10, 3*-2
           final m = _numAt(s, j + 1);
           if (m != null && (j + 1 + m.length == s.length || _opChars.contains(s[j + 1 + m.length]))) {
-            out.add(Token(TokKind.number, '-$m',
-                value: LogoNumber(-parseLogoNumber(m)!), pos: at(j, m.length + 1)));
+            out.add(Token(TokKind.number, '-$m', value: LogoNumber(-parseLogoNumber(m)!), pos: at(j, m.length + 1)));
             j += 1 + m.length;
             continue;
           }
@@ -210,11 +209,11 @@ class Parser {
   SourcePos? get _endPos => _toks.isNotEmpty ? _toks.last.pos : _fallbackPos;
 
   static int _prec(String op) => switch (op) {
-        '=' || '<' || '>' || '<=' || '>=' || '<>' => 1,
-        '+' || '-' => 2,
-        '*' || '/' => 3,
-        _ => 0,
-      };
+    '=' || '<' || '>' || '<=' || '>=' || '<>' => 1,
+    '+' || '-' => 2,
+    '*' || '/' => 3,
+    _ => 0,
+  };
 
   Node parseExpression([int minPrec = 1]) {
     var left = _parseUnary();

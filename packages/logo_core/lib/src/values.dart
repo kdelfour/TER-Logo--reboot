@@ -36,9 +36,7 @@ class LogoWord extends LogoValue {
 class LogoNumber extends LogoWord {
   final num value;
 
-  LogoNumber(num v)
-      : value = _normalize(v),
-        super(formatNumber(_normalize(v)));
+  LogoNumber(num v) : value = _normalize(v), super(formatNumber(_normalize(v)));
 
   static num _normalize(num v) {
     if (v is double && v.isFinite && v == v.roundToDouble() && v.abs() < 1e15) {

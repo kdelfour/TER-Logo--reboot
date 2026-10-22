@@ -37,8 +37,8 @@ class PrimCall {
   int get count => args.length;
   LogoValue operator [](int i) => args[i];
 
-  LogoError badArg(int i, [String? what]) => LogoError(
-      '« $name » n\'aime pas « ${args[i].show()} » comme ${what ?? 'argument'}', node.pos);
+  LogoError badArg(int i, [String? what]) =>
+      LogoError('« $name » n\'aime pas « ${args[i].show()} » comme ${what ?? 'argument'}', node.pos);
 
   num number(int i) {
     final a = args[i];
@@ -100,11 +100,7 @@ class UserProcedure {
 
   UserProcedure(this.name, this.required, this.optional, this.rest, this.body, this.source);
 
-  Arity get arity => Arity(
-        required.length,
-        required.length,
-        rest != null ? -1 : required.length + optional.length,
-      );
+  Arity get arity => Arity(required.length, required.length, rest != null ? -1 : required.length + optional.length);
 }
 
 class Frame {
@@ -168,7 +164,7 @@ class Interpreter {
   final Stopwatch _sinceYield = Stopwatch()..start();
 
   Interpreter(this.host, {math.Random? random, List<Primitive> Function()? extraPrimitives})
-      : random = random ?? math.Random() {
+    : random = random ?? math.Random() {
     for (final p in allPrimitives()) {
       definePrimitive(p);
     }
@@ -189,8 +185,7 @@ class Interpreter {
   Frame get frame => _frame;
   int get repcount => _repcount.isEmpty ? -1 : _repcount.last;
 
-  Arity? arityOf(String lowerName) =>
-      primitives[lowerName]?.arity ?? procedures[lowerName]?.arity;
+  Arity? arityOf(String lowerName) => primitives[lowerName]?.arity ?? procedures[lowerName]?.arity;
 
   // -------------------------------------------------------------------------
   // Contrôle de l'exécution
@@ -350,8 +345,10 @@ class Interpreter {
         _install(UserProcedure(name, required, optional, rest, body, header.source));
         return i;
       }
-      throw LogoError('Entrée inattendue « ${items[k].show()} » dans la définition de « $name »',
-          items[k] is LogoWord ? (items[k] as LogoWord).pos : (items[k] as LogoList).pos);
+      throw LogoError(
+        'Entrée inattendue « ${items[k].show()} » dans la définition de « $name »',
+        items[k] is LogoWord ? (items[k] as LogoWord).pos : (items[k] as LogoList).pos,
+      );
     }
     while (true) {
       if (i >= lines.length) {
@@ -394,8 +391,7 @@ class Interpreter {
   // Évaluation
   // -------------------------------------------------------------------------
 
-  LogoError _whatToDo(LogoValue v, SourcePos? pos) =>
-      LogoError('Je ne sais que faire de « ${v.show()} »', pos);
+  LogoError _whatToDo(LogoValue v, SourcePos? pos) => LogoError('Je ne sais que faire de « ${v.show()} »', pos);
 
   List<Node> parseCached(LogoList list) {
     if (list.parseCacheGeneration == _generation && list.parseCache != null) {

@@ -62,43 +62,58 @@ class RecordingHost implements LogoHost {
         case MoveEvent(draw: true):
           grow(e.x0, e.y0);
           grow(e.x1, e.y1);
-          shapes.add('<line x1="${_f(e.x0)}" y1="${_f(-e.y0)}" x2="${_f(e.x1)}" y2="${_f(-e.y1)}" '
-              '${stroke(e.style)} stroke-linecap="round"/>');
+          shapes.add(
+            '<line x1="${_f(e.x0)}" y1="${_f(-e.y0)}" x2="${_f(e.x1)}" y2="${_f(-e.y1)}" '
+            '${stroke(e.style)} stroke-linecap="round"/>',
+          );
         case ArcEvent():
           grow(e.cx, e.cy, e.radius);
           if (e.sweep.abs() >= 360) {
-            shapes.add('<circle cx="${_f(e.cx)}" cy="${_f(-e.cy)}" r="${_f(e.radius)}" fill="none" ${stroke(e.style)}/>');
+            shapes.add(
+              '<circle cx="${_f(e.cx)}" cy="${_f(-e.cy)}" r="${_f(e.radius)}" fill="none" ${stroke(e.style)}/>',
+            );
           } else {
             (double, double) at(double a) {
               final r = a * math.pi / 180;
               return (e.cx + e.radius * math.sin(r), -(e.cy + e.radius * math.cos(r)));
             }
+
             final (sx, sy) = at(e.start);
             final (ex, ey) = at(e.start + e.sweep);
             final large = e.sweep.abs() > 180 ? 1 : 0;
             final sweep = e.sweep > 0 ? 1 : 0;
-            shapes.add('<path d="M ${_f(sx)} ${_f(sy)} A ${_f(e.radius)} ${_f(e.radius)} 0 $large $sweep '
-                '${_f(ex)} ${_f(ey)}" fill="none" ${stroke(e.style)}/>');
+            shapes.add(
+              '<path d="M ${_f(sx)} ${_f(sy)} A ${_f(e.radius)} ${_f(e.radius)} 0 $large $sweep '
+              '${_f(ex)} ${_f(ey)}" fill="none" ${stroke(e.style)}/>',
+            );
           }
         case DotEvent():
           grow(e.x, e.y, e.style.width);
-          shapes.add('<circle cx="${_f(e.x)}" cy="${_f(-e.y)}" r="${_f(math.max(1, e.style.width / 2))}" '
-              'fill="${_hex(e.style.color)}"/>');
+          shapes.add(
+            '<circle cx="${_f(e.x)}" cy="${_f(-e.y)}" r="${_f(math.max(1, e.style.width / 2))}" '
+            'fill="${_hex(e.style.color)}"/>',
+          );
         case LabelEvent():
           grow(e.x, e.y);
           grow(e.x + e.fontSize * e.text.length * 0.6, e.y + e.fontSize);
-          shapes.add('<text x="${_f(e.x)}" y="${_f(-e.y)}" font-family="sans-serif" font-size="${_f(e.fontSize)}" '
-              'fill="${_hex(e.color)}">${_escape(e.text)}</text>');
+          shapes.add(
+            '<text x="${_f(e.x)}" y="${_f(-e.y)}" font-family="sans-serif" font-size="${_f(e.fontSize)}" '
+            'fill="${_hex(e.color)}">${_escape(e.text)}</text>',
+          );
         default:
           break;
       }
     }
     final w = maxX - minX + 2 * margin, h = maxY - minY + 2 * margin;
     final buf = StringBuffer()
-      ..writeln('<svg xmlns="http://www.w3.org/2000/svg" viewBox="${_f(minX - margin)} ${_f(minY - margin)} '
-          '${_f(w)} ${_f(h)}" width="${_f(w)}" height="${_f(h)}">')
-      ..writeln('<rect x="${_f(minX - margin)}" y="${_f(minY - margin)}" width="${_f(w)}" height="${_f(h)}" '
-          'fill="${_hex(bg)}"/>');
+      ..writeln(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="${_f(minX - margin)} ${_f(minY - margin)} '
+        '${_f(w)} ${_f(h)}" width="${_f(w)}" height="${_f(h)}">',
+      )
+      ..writeln(
+        '<rect x="${_f(minX - margin)}" y="${_f(minY - margin)}" width="${_f(w)}" height="${_f(h)}" '
+        'fill="${_hex(bg)}"/>',
+      );
     for (final s in shapes) {
       buf.writeln(s);
     }

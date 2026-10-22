@@ -389,7 +389,10 @@ ecris compte_a 200000 0
 
   group('exemples', () {
     final dir = Directory('../../examples');
-    for (final f in dir.existsSync() ? (dir.listSync().whereType<File>().toList()..sort((a, b) => a.path.compareTo(b.path))) : <File>[]) {
+    for (final f
+        in dir.existsSync()
+            ? (dir.listSync().whereType<File>().toList()..sort((a, b) => a.path.compareTo(b.path)))
+            : <File>[]) {
       test(f.uri.pathSegments.last, () async {
         final (host, _) = await run(f.readAsStringSync());
         expect(host.toSvg(), startsWith('<svg'));

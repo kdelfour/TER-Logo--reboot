@@ -6,9 +6,9 @@ import 'turtle_prims.dart';
 import 'words.dart';
 
 List<Primitive> allPrimitives() => [
-      ...turtlePrimitives(),
-      ...controlPrimitives(),
-      ...mathPrimitives(),
-      ...wordPrimitives(),
-      ...ioPrimitives(),
-    ];
+  ...turtlePrimitives(),
+  ...controlPrimitives(),
+  ...mathPrimitives(),
+  ...wordPrimitives(),
+  ...ioPrimitives(),
+];

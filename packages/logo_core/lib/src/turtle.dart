@@ -198,11 +198,7 @@ Argb colorFromValue(LogoValue v, String procName) {
 LogoValue colorToValue(Argb c) {
   final i = logoPalette.indexOf(c);
   if (i >= 0) return LogoNumber(i);
-  return LogoList([
-    LogoNumber((c >> 16) & 0xFF),
-    LogoNumber((c >> 8) & 0xFF),
-    LogoNumber(c & 0xFF),
-  ]);
+  return LogoList([LogoNumber((c >> 16) & 0xFF), LogoNumber((c >> 8) & 0xFF), LogoNumber(c & 0xFF)]);
 }
 
 String _stripAccents(String s) => s

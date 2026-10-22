@@ -1,3 +1,4 @@
+; Calculs, mots et listes
 ; Logo ne fait pas que dessiner : mots, listes et procédures qui retournent une valeur.
 
 pour factorielle :n

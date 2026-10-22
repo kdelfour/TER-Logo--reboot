@@ -19,7 +19,9 @@ Future<void> main(List<String> args) async {
     }
   }
 
-  final source = file == null ? await stdin.transform(const SystemEncoding().decoder).join() : File(file).readAsStringSync();
+  final source = file == null
+      ? await stdin.transform(const SystemEncoding().decoder).join()
+      : File(file).readAsStringSync();
   final host = _CliHost();
   final ip = Interpreter(host);
   var code = 0;

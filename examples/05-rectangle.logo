@@ -1,3 +1,4 @@
+; Rectangle (entrée optionnelle)
 ; Exemple n°5 du rapport : une entrée optionnelle.
 ; [:y 50] donne la valeur 50 à :y si on ne la précise pas.
 

@@ -1,3 +1,4 @@
+; Courbe C de Lévy
 ; Exemple n°2 du rapport : la courbe C de Lévy, six fois en rosace.
 
 pour ccourbe :long :profondeur
