@@ -1,0 +1,19 @@
+; Exemple n°1 du rapport de 2007 : des cercles décalés.
+; On dessine une première fois en trait plein bleu,
+; puis par-dessus en pointillés rouges.
+
+pour n_eck :ne :sz
+  repete :ne [td 360 / :ne av :sz]
+fin
+
+pour mn_eck :ne :sz
+  repete :ne [td 360 / :ne n_eck :ne :sz]
+fin
+
+ve
+fcc "bleu
+mn_eck 36 20
+
+ftrait 2
+fcc "rouge
+mn_eck 36 20

@@ -1,0 +1,16 @@
+; Exemple n°4 du rapport : des étoiles qui rétrécissent.
+
+pour etoile :x
+  repete 5 [av :x td 144]
+fin
+
+pour etoiles :x :co
+  si :x < 0 [stop]
+  fcc modulo :co 15
+  etoile :x
+  etoiles :x - 10 :co + 1
+fin
+
+ve
+vitesse 0
+etoiles 300 0

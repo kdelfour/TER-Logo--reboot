@@ -1,0 +1,18 @@
+; Logo ne fait pas que dessiner : mots, listes et procédures qui retournent une valeur.
+
+pour factorielle :n
+  si :n < 2 [retourne 1]
+  retourne :n * factorielle :n - 1
+fin
+
+pour carres :liste
+  si vide? :liste [retourne []]
+  retourne phrase (premier :liste) * (premier :liste) carres saufpremier :liste
+fin
+
+ecris factorielle 10
+montre carres [1 2 3 4 5]
+ecris mot "Lo "go
+ecris inverse [le langage Logo]
+repetepour [i 1 5] [tape :i tape "| |]
+ecris "

@@ -1,0 +1,22 @@
+; Le flocon de von Koch.
+
+pour koch :long :niveau
+  si :niveau = 0 [av :long stop]
+  koch :long / 3 :niveau - 1
+  tg 60
+  koch :long / 3 :niveau - 1
+  td 120
+  koch :long / 3 :niveau - 1
+  tg 60
+  koch :long / 3 :niveau - 1
+fin
+
+pour flocon :long :niveau
+  repete 3 [koch :long :niveau td 120]
+fin
+
+ve
+lc fixepos [-150 90] bc
+fixecap 90
+fcc "bleufonce
+flocon 300 4

@@ -1,0 +1,14 @@
+; Exemple n°3 du rapport : des spirales multicolores.
+
+pour spirale :a :co
+  si :a > 3000 [stop]
+  fcc modulo :co 15
+  av 10 td :a
+  spirale :a + 7 :co + 1
+fin
+
+ve
+spirale 0 0
+spirale 45 270
+spirale 90 180
+spirale 135 90

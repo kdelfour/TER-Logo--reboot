@@ -1,0 +1,13 @@
+; Exemple n°5 du rapport : une entrée optionnelle.
+; [:y 50] donne la valeur 50 à :y si on ne la précise pas.
+
+pour rectangle :x [:y 50]
+  repete 2 [av :x td 90 av :y td 90]
+fin
+
+ve
+fcc "bleu
+rectangle 100          ; x = 100, y = 50
+
+fcc "vert
+(rectangle 150 100)    ; entre parenthèses : x = 150, y = 100

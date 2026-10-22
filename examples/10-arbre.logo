@@ -1,0 +1,16 @@
+; Un arbre récursif.
+
+pour arbre :taille :niveau
+  si :niveau = 0 [stop]
+  fixetaillecrayon :niveau
+  av :taille
+  tg 25 arbre :taille * 0.75 :niveau - 1
+  td 50 arbre :taille * 0.75 :niveau - 1
+  tg 25
+  re :taille
+fin
+
+ve
+lc re 200 bc
+fcc [110 70 30]
+arbre 120 9

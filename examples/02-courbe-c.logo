@@ -1,0 +1,20 @@
+; Exemple n°2 du rapport : la courbe C de Lévy, six fois en rosace.
+
+pour ccourbe :long :profondeur
+  sisinon :profondeur < -1 [av arrondi :long] [
+    tg 45
+    ccourbe :long / 1.4142 :profondeur - 1
+    td 90
+    ccourbe :long / 1.4142 :profondeur - 1
+    tg 45
+  ]
+fin
+
+pour rosace :x
+  repete :x [ccourbe 100 8 td 360 / :x]
+fin
+
+ve
+fcc "bleu
+vitesse 0
+rosace 6
