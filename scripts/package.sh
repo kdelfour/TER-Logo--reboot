@@ -30,6 +30,15 @@ install -d "$STAGE/opt/$APP" "$STAGE/usr/bin" "$STAGE/usr/share/applications" \
   "$STAGE/usr/share/metainfo" "$STAGE/usr/share/mime/packages" "$STAGE/usr/share/doc/$APP" \
   "$STAGE/usr/share/icons/hicolor/scalable/apps"
 cp -a "$BUNDLE/." "$STAGE/opt/$APP/"
+# Les plugins Flutter gardent un RUNPATH vers le dossier de compilation :
+# on le remplace par $ORIGIN (les bibliothèques sont côte à côte).
+if command -v patchelf >/dev/null; then
+  for so in "$STAGE/opt/$APP"/lib/*.so; do
+    if readelf -d "$so" | grep -q RUNPATH; then patchelf --set-rpath '$ORIGIN' "$so"; fi
+  done
+else
+  echo "Attention : patchelf absent, RUNPATH des plugins non corrigé" >&2
+fi
 ln -s "/opt/$APP/$APP" "$STAGE/usr/bin/$APP"
 install -m 644 "packaging/linux/$APP_ID.desktop" "$STAGE/usr/share/applications/"
 install -m 644 "packaging/linux/$APP_ID.metainfo.xml" "$STAGE/usr/share/metainfo/"

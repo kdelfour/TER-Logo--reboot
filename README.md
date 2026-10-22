@@ -90,7 +90,7 @@ L'application s'installe dans `/opt/ter-logo-reboot`, avec un lanceur dans le me
 Il faut Flutter 3.47 et les dépendances de compilation Linux :
 
 ```sh
-sudo apt install clang cmake ninja-build pkg-config libgtk-3-dev rpm
+sudo apt install clang cmake ninja-build pkg-config libgtk-3-dev rpm patchelf
 flutter pub get
 flutter run -d linux             # lancer en développement
 scripts/package.sh               # produire dist/*.deb et dist/*.rpm
