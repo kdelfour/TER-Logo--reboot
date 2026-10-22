@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4CAF50"/>
+      <stop offset="1" stop-color="#1B5E20"/>
+    </linearGradient>
+    <radialGradient id="shell" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#4CAF50"/>
+      <stop offset="1" stop-color="#1B5E20"/>
+    </radialGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bg)"/>
+  <!-- tracé de la tortue -->
+  <path d="M96 400 L96 300 L196 300 L196 400 Z" fill="none" stroke="#FFF59D" stroke-width="14" stroke-linejoin="round" stroke-linecap="round" opacity="0.9"/>
+  <path d="M196 400 L300 296" stroke="#FFF59D" stroke-width="14" stroke-linecap="round" stroke-dasharray="2 26" opacity="0.9"/>
+  <g transform="translate(316 236) rotate(45) scale(7.2)">
+    <ellipse cx="1.5" cy="2" rx="11" ry="13" fill="#000" opacity="0.18"/>
+    <g fill="#8BC34A" stroke="#1B3D1D" stroke-width="1.1">
+      <ellipse cx="-9" cy="-6" rx="3.6" ry="2.8"/>
+      <ellipse cx="9" cy="-6" rx="3.6" ry="2.8"/>
+      <ellipse cx="-8" cy="7" rx="3.6" ry="2.8"/>
+      <ellipse cx="8" cy="7" rx="3.6" ry="2.8"/>
+      <ellipse cx="0" cy="-13" rx="4.4" ry="4.6"/>
+    </g>
+    <path d="M-2 11 L0 15 L2 11 Z" fill="#558B2F"/>
+    <circle cx="-2.2" cy="-14.5" r="1.1" fill="#1B1B1B"/>
+    <circle cx="2.2" cy="-14.5" r="1.1" fill="#1B1B1B"/>
+    <ellipse cx="0" cy="0.5" rx="8.6" ry="10.6" fill="url(#shell)" stroke="#1B3D1D" stroke-width="1.1"/>
+    <polygon points="3.64,2.9 0,5.3 -3.64,2.9 -3.64,-1.9 0,-4.3 3.64,-1.9" fill="#81C784" stroke="#1B5E20" stroke-width="0.8"/>
+    <g stroke="#1B5E20" stroke-width="0.8">
+      <line x1="3.64" y1="2.9" x2="7.1" y2="5.6"/><line x1="0" y1="5.3" x2="0" y2="10.7"/>
+      <line x1="-3.64" y1="2.9" x2="-7.1" y2="5.6"/><line x1="-3.64" y1="-1.9" x2="-7.1" y2="-4.6"/>
+      <line x1="0" y1="-4.3" x2="0" y2="-9.7"/><line x1="3.64" y1="-1.9" x2="7.1" y2="-4.6"/>
+    </g>
+    <ellipse cx="-3" cy="-4" rx="2" ry="1.2" fill="#fff" opacity="0.35"/>
+  </g>
+</svg>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.kdelfour.TerLogoReboot</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>TER Logo Reboot</name>
+  <developer id="io.github.kdelfour">
+    <name>Kevin Delfour</name>
+  </developer>
+  <summary xml:lang="fr">Programmer la tortue Logo en français</summary>
+  <summary>Program the Logo turtle in French</summary>
+  <description>
+    <p xml:lang="fr">
+      Un interpréteur Logo francophone pour le bureau : éditeur avec coloration,
+      console interactive, tortue animée, télécommande pour les plus jeunes,
+      export des dessins en PNG et SVG.
+    </p>
+    <p>
+      A French-language Logo interpreter for the desktop, with a syntax-highlighting
+      editor, an interactive console, an animated turtle and PNG/SVG export.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.kdelfour.TerLogoReboot.desktop</launchable>
+  <url type="homepage">https://github.com/kdelfour/TER-Logo--reboot</url>
+  <categories>
+    <category>Education</category>
+    <category>Development</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="1.0.0" date="2026-10-22"/>
+  </releases>
+</component>

@@ -139,14 +139,16 @@ class CanvasController extends ChangeNotifier {
     }
   }
 
-  double get _pixelsPerSecond => _speed * 8.0;
-  double get _degreesPerSecond => _speed * 12.0;
+  // Échelle non linéaire : fine aux basses vitesses, très rapide en haut
+  // (1 → 8 pas/s, 100 → ~3 200 pas/s, 500 → ~26 000 pas/s).
+  double get _pixelsPerSecond => 8.0 * math.pow(_speed, 1.3);
+  double get _degreesPerSecond => 30.0 * math.pow(_speed, 1.3);
 
   double _durationOf(TurtleEvent e) {
     if (_speed == 0) return 0;
     return switch (e) {
       MoveEvent() => e.length / _pixelsPerSecond,
-      TurnEvent() => (e.to - e.from).abs() / _degreesPerSecond,
+      TurnEvent() => _turnDelta(e).abs() / _degreesPerSecond,
       ArcEvent() => (e.radius * e.sweep.abs() * math.pi / 180) / _pixelsPerSecond,
       _ => 0,
     };
@@ -354,10 +356,17 @@ class CanvasController extends ChangeNotifier {
     final t = _activeProgress;
     return switch (e) {
       MoveEvent() => (e.x0 + (e.x1 - e.x0) * t, e.y0 + (e.y1 - e.y0) * t, turtleHeading),
-      TurnEvent() => (turtleX, turtleY, e.from + (e.to - e.from) * t),
+      TurnEvent() => (turtleX, turtleY, e.from + _turnDelta(e) * t),
       _ => (turtleX, turtleY, turtleHeading),
     };
   }
+}
+
+/// Rotation affichée : le plus court chemin (td 3000 tourne de 120°).
+double _turnDelta(TurnEvent e) {
+  var d = (e.to - e.from) % 360;
+  if (d > 180) d -= 360;
+  return d;
 }
 
 Paint _strokePaint(PenStyle s) => Paint()

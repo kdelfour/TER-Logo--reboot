@@ -3,12 +3,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'ui/home_page.dart';
 
-void main() {
-  runApp(const TerLogoApp());
+void main(List<String> args) {
+  runApp(TerLogoApp(files: args.where((a) => !a.startsWith('-')).toList()));
 }
 
 class TerLogoApp extends StatefulWidget {
-  const TerLogoApp({super.key});
+  /// Fichiers à ouvrir au démarrage (double-clic sur un .logo).
+  final List<String> files;
+
+  const TerLogoApp({super.key, this.files = const []});
 
   @override
   State<TerLogoApp> createState() => _TerLogoAppState();
@@ -41,7 +44,7 @@ class _TerLogoAppState extends State<TerLogoApp> {
         locale: const Locale('fr'),
         supportedLocales: const [Locale('fr')],
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
-        home: HomePage(themeMode: themeMode),
+        home: HomePage(themeMode: themeMode, files: widget.files),
       ),
     );
   }

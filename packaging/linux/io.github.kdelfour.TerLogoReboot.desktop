@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=TER Logo Reboot
+GenericName=Interpréteur Logo
+GenericName[en]=Logo interpreter
+Comment=Programmer la tortue Logo en français
+Comment[en]=Program the Logo turtle in French
+Exec=ter-logo-reboot %F
+Icon=io.github.kdelfour.TerLogoReboot
+Terminal=false
+Categories=Education;ComputerScience;
+Keywords=logo;tortue;turtle;programmation;apprentissage;
+MimeType=text/x-logo;
+StartupWMClass=io.github.kdelfour.TerLogoReboot
+StartupNotify=true

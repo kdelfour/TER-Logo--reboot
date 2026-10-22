@@ -19,8 +19,9 @@ const _logoFiles = XTypeGroup(label: 'Programmes Logo', extensions: ['logo', 'lg
 
 class HomePage extends StatefulWidget {
   final ValueNotifier<ThemeMode> themeMode;
+  final List<String> files;
 
-  const HomePage({super.key, required this.themeMode});
+  const HomePage({super.key, required this.themeMode, this.files = const []});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -36,11 +37,16 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     app.onReadLine = _askLine;
+    HardwareKeyboard.instance.addHandler(_globalKeys);
     _loadExamples();
+    for (final f in widget.files) {
+      app.openFile(File(f).absolute.path).catchError((Object e) => app.consoleError('Impossible d\'ouvrir $f : $e'));
+    }
   }
 
   @override
   void dispose() {
+    HardwareKeyboard.instance.removeHandler(_globalKeys);
     app.dispose();
     viewport.dispose();
     super.dispose();
@@ -179,17 +185,33 @@ class _HomePageState extends State<HomePage> {
   // Interface
   // -------------------------------------------------------------------------
 
+  /// Touches de fonction actives même quand aucun widget n'a le focus
+  /// (après un clic sur la barre d'outils ou le dessin, par exemple).
+  bool _globalKeys(KeyEvent e) {
+    if (e is! KeyDownEvent || !mounted) return false;
+    if (!(ModalRoute.of(context)?.isCurrent ?? true)) return false;
+    final key = e.logicalKey;
+    if (key == LogicalKeyboardKey.f5) {
+      app.runActiveDocument();
+    } else if (key == LogicalKeyboardKey.f6) {
+      app.togglePause();
+    } else if (key == LogicalKeyboardKey.f1) {
+      HelpDialog.show(context, app.interpreter.primitiveList);
+    } else if (key == LogicalKeyboardKey.escape && app.isRunning) {
+      app.stop();
+    } else {
+      return false;
+    }
+    return true;
+  }
+
   Map<ShortcutActivator, VoidCallback> get _shortcuts => {
-    const SingleActivator(LogicalKeyboardKey.f5): app.runActiveDocument,
     const SingleActivator(LogicalKeyboardKey.enter, control: true): app.runSelectionOrDocument,
-    const SingleActivator(LogicalKeyboardKey.escape): app.stop,
-    const SingleActivator(LogicalKeyboardKey.f6): app.togglePause,
     const SingleActivator(LogicalKeyboardKey.keyN, control: true): () => app.newDocument(),
     const SingleActivator(LogicalKeyboardKey.keyO, control: true): _open,
     const SingleActivator(LogicalKeyboardKey.keyS, control: true): _save,
     const SingleActivator(LogicalKeyboardKey.keyS, control: true, shift: true): () => _save(saveAs: true),
     const SingleActivator(LogicalKeyboardKey.keyW, control: true): () => _closeTab(app.activeIndex),
-    const SingleActivator(LogicalKeyboardKey.f1): () => HelpDialog.show(context, app.interpreter.primitiveList),
     const SingleActivator(LogicalKeyboardKey.keyL, control: true, shift: true): app.clearScreen,
   };
 
